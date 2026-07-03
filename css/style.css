@@ -230,7 +230,7 @@ img {
 .logo img {
     width: 100px;
     height: 100px;
-    object-fit: contain;
+    /*object-fit: contain;*/
 }
 
 .logo-text {
