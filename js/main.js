@@ -45,6 +45,26 @@ document.addEventListener('DOMContentLoaded', function() {
             link.classList.add('active');
         });
     });
+
+    // Dropdown menus (About / Services) - tap to open on mobile, hover on desktop
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                const parentLi = toggle.closest('.has-dropdown');
+                const isOpen = parentLi.classList.contains('open');
+                document.querySelectorAll('.has-dropdown.open').forEach(li => {
+                    if (li !== parentLi) li.classList.remove('open');
+                });
+                if (!isOpen) {
+                    e.preventDefault();
+                    parentLi.classList.add('open');
+                } else {
+                    parentLi.classList.remove('open');
+                }
+            }
+        });
+    });
     
     // Navbar scroll effect
     window.addEventListener('scroll', () => {
@@ -417,7 +437,22 @@ document.addEventListener('DOMContentLoaded', function() {
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
     `;
+
+    // ==========================================
+    // HERO BACKGROUND SLIDER (country images)
+    // ==========================================
+    const heroSlides = document.querySelectorAll('.hero-bg-slide');
+    if (heroSlides.length) {
+        let heroSlideIndex = 0;
+        setInterval(() => {
+            heroSlides[heroSlideIndex].classList.remove('active');
+            heroSlideIndex = (heroSlideIndex + 1) % heroSlides.length;
+            heroSlides[heroSlideIndex].classList.add('active');
+        }, 4500);
+    }
+
     document.head.appendChild(animStyle);
-    
+
     console.log('✅ Incept Education Consultancy website loaded successfully!');
+
 });
